@@ -6,7 +6,7 @@ import {Task} from "./toDoListSlice.ts";
 
 const ToDoList = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const {tasks} = useSelector((state: RootState) => state.toDoList);
+    const {tasks, loading, error} = useSelector((state: RootState) => state.toDoList);
     const [newTaskTitle, setNewTaskTitle] = useState("");
 
     useEffect(() => {
@@ -42,6 +42,9 @@ const ToDoList = () => {
                 />
                 <button type="submit">Add</button>
             </form>
+
+            {loading && <p>Loading...</p>}
+            {error && <p style={{color: "red"}}>{error}</p>}
 
             <ul>
                 {tasks.map((task) => (
